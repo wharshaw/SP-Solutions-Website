@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${news.title}">News Detail</title>
+</head>
+<body>
+
+<h1 th:text="${news.title}">News Title</h1>
+<p th:text="${news.content}">News Content</p>
+
+<h3>Comments</h3>
+<ul>
+    <li th:each="comment : ${comments}">
+        <strong th:text="${comment.commenterName}">User</strong>: <span th:text="${comment.text}">Comment Text</span>
+    </li>
+</ul>
+
+<h3>Add a Comment</h3>
+<form th:action="@{'/news/' + ${news.id} + '/comment'}" method="post">
+    <input type="text" name="commenterName" placeholder="Your name" required />
+    <textarea name="text" placeholder="Write your comment..." required></textarea>
+    <button type="submit">Add Comment</button>
+</form>
+
+</body>
+</html>
